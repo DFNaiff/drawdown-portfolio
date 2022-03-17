@@ -1,0 +1,113 @@
+\documentclass[]{article}
+
+%opening
+\title{}
+\author{Danilo de Freitas Naiff}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+% \usepackage{booktabs}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage[version=4]{mhchem}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{nomencl}
+\usepackage{multirow}
+\usepackage{algpseudocode}
+\usepackage{subfig}
+\usepackage{listings}
+\usepackage{tikz}
+\algnewcommand{\LineComment}[1]{\State \(\triangleright\) #1}
+\makenomenclature
+
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\pderiv}[2]{\frac{\partial #1}{\partial #2}}
+
+\newcommand{\argmax}{\operatorname{argmax}}
+\newcommand{\argmin}{\operatorname{argmin}}
+\def \gu {{\bar{g}}}
+\def \Ev {{\mathbb E}}
+\def \Pr {{\mathbb P}}
+\def \f {{\mathbf f}}
+\def \u {{\mathbf u}}
+\def \y {{\mathbf y}}
+\def \x {{\mathbf x}}
+\def \m {{\mathbf m}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+
+% My own definitions of colors 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+% Definitions on how to display listings
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{white},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{blue},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\tiny,
+	language=Python,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos= top,%b                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,
+	%stepnumber=3,                  
+	tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Objetive:
+\begin{equation}
+\begin{split}
+& \text{maximize} \\
+& \quad x_T^T \alpha \\
+& \text{s.t.} \\
+& \quad \alpha \in \Delta_N \\
+& \quad (1-\gamma) \max_{s \in {0,\ldots,t}}{x_s^T \alpha} - x_t^T \alpha \leq 0, \forall t. \\
+\end{split}
+\end{equation}
+Here, $\gamma$ is the drawdown tolerance, $x_t$ the portfolio price vector at $t$, and $\alpha$ is the asset.
+
+If we define $m_t$ as an "envelope" for the series maximum, then minimizing the following problem is equivalent to minimize the original problem:
+\begin{equation}
+\begin{split}
+     & \text{minimize} \\ 
+     & \quad (-\lambda_1 x_T,\lambda_2   \mathbf{1}_{N})^T (\alpha, m) \\
+     & \text{s.t.} \\
+     & \quad -\alpha \leq 0 \\
+     & \quad (1-\gamma) m_t - x_t^T \alpha \leq 0, \quad t=1, \ldots, N \\
+     & \quad m_t - m_{t+1} \leq 0, \quad t=1, \ldots, N-1 \\
+     & \quad x_t^T \alpha - m_t \leq 0, \quad t=2, \ldots, T \\
+     & \quad \mathbf{1}^T \alpha - 1 = 0 \\
+     & \quad m_1 - x_1^T \alpha = 0
+\end{split}
+\end{equation}
+\end{abstract}
+
+\end{document}
